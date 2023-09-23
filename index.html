@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Word Counter using Javascript || Lexical Programmer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="word__counter__container">
+        <textarea name="textarea" id="textarea" placeholder="Type here..."></textarea>
+        <div class="actions__info__container">
+            <div class="info">
+                <span class="character">0 Character</span>
+                <span class="word">0 Word</span>
+            </div>
+            <div class="actions">
+                <button class="lowerCase" onclick="convertToLowerCase();">ConvertToLowerCase</button>
+                <button class="uppercase" onclick="convertToUpperCase();">ConvertToUpperCase</button>
+                <button class="copy" onclick="copy();">Copy</button>
+                <button class="clear" onclick="Clear();">Clear</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const textarea = document.querySelector("#textarea");
+        const totalCharacter = document.querySelector(".character");
+        const totalWord = document.querySelector(".word");
+
+        textarea.addEventListener("input",()=>{
+            let textareaValue = textarea.value;
+            totalCharacter.innerHTML =  `${textareaValue.length} Character`;
+            if(textareaValue.length <=0){
+                totalWord.innerHTML = `${0} Word`;
+            }
+            else{
+                totalWord.innerHTML = `${textareaValue.split(" ").length} Word`;
+            }
+        })
+        function convertToLowerCase(){
+            textarea.value = textarea.value.toLowerCase();
+        }
+        function convertToUpperCase(){
+            textarea.value = textarea.value.toUpperCase();
+        }
+        function copy(){
+            navigator.clipboard.writeText(textarea.value);
+        }
+        function Clear(){
+            textarea.value = "";
+            totalCharacter.innerHTML = `0 Character`;
+            totalWord.innerHTML = `0 Word`;
+        }
+    </script>
+</body>
+</html>
